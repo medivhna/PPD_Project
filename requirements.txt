@@ -1,3 +1,2 @@
 django==1.8.6
-turbogears==1.5.1
-registration==0.50
+django-registration==2.2
