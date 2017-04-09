@@ -1,0 +1,110 @@
+{% extends 'rango/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Index{% endblock %}
+
+        {% block body_block %}
+
+            <div class="page-header">
+        {% if user.is_authenticated %}
+            
+
+            <h1>Lisa says... hello {{ user.username }}!</h1>
+        {% else %}
+            <h1>Lisa says... hello world!</h1>
+        {% endif %}
+            </div>
+
+
+        <div class="row placeholders">
+            <div class="col-xs-12 col-sm-6 placeholder">
+                <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">热门模块</h3>
+                </div>
+                </div>
+
+        {% if categories %}
+                    <ul class="list-group">
+            {% for category in categories %}
+                    <li class="list-group-item"><a href="{% url 'category' category.slug %}">{{ category.name }}</a></li>
+            {% endfor %}
+                    </ul>
+        {% else %}
+                    <strong>There are no categories present.</strong>
+        {% endif %}
+
+            </div>
+            <div class="col-xs-12 col-sm-6 placeholder">
+                <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">热门帖子</h3>
+                </div>
+                </div>
+
+        {% if pages %}
+                    <ul class="list-group">
+            {% for page in pages %}
+                         <li class="list-group-item"><a href="{% url 'page' page.title %}">{{ page.title }}({{ page.views }})</a></li>
+            {% endfor %}
+                    </ul>
+        {% else %}
+                    <strong>There are no categories present.</strong>
+        {% endif %}
+            </div>   
+
+        </div>
+
+
+
+
+
+    
+        <div class="row placeholders">
+            <div class="col-xs-12 col-sm-6 placeholder">
+                <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">公告信息</h3>
+                </div>
+                </div>
+
+        {% if notices %}
+                    <ul class="list-group">
+            {% for notice in notices %}
+                    <li class="list-group-item"><a href="{% url 'notice' notice.title %}">{{ notice.title }}</a></li>
+            {% endfor %}
+                    </ul>
+        {% else %}
+                    <strong>There are no notice present.</strong>
+        {% endif %}
+
+            </div>
+            <div class="col-xs-12 col-sm-6 placeholder">
+                <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">新闻速递</h3>
+                </div>
+                </div>
+
+        {% if pages %}
+                    <ul class="list-group">
+            {% for page in pages %}
+                         <li class="list-group-item"><a href="{{page.url}}">{{ page.title }}({{ page.views }})</a></li>
+            {% endfor %}
+                    </ul>
+        {% else %}
+                    <strong>There are no categories present.</strong>
+        {% endif %}
+            </div>   
+
+        </div>
+
+
+
+
+
+
+
+       <p> visits: {{ visits }}</p>
+        {% endblock %}
